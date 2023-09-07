@@ -1,1 +1,85 @@
-<p>diretiva-ngif works!</p>
+<h5>*ngIf</h5>
+
+<!--  aqui eh um exemplo que a Loiane ensinou  -->
+<div *ngIf="cursos.length > 0">
+  Lista de cursos
+</div>
+
+<div *ngIf="cursos.length == 0">
+  Não existem cursos para serem listados
+</div>
+
+<h3>Button</h3>
+<!-- Aqui o mostraCursos eh um boolean true -->
+<div *ngIf="!mostrarCursos">
+  Lista de cursos
+</div>
+
+<div *ngIf="mostrarCursos">
+  Não existem cursos para serem listados
+</div>
+
+<!-- O hidden é uma alternativa ao *ngIf, porém ele não remove o elemento do DOM, ele apenas o esconde -->
+<!-- O hidden é uma propriedade do html, não é uma diretiva do angular -->
+<!-- Caso exista um elemento com o hidden e o *ngIf, o *ngIf tem prioridade -->
+<!-- Caso eu remova o elemento do DOM, o angular não consegue mais acessar o elemento, por isso o *ngIf é melhor, pois ele remove o elemento do DOM -->
+<!-- Não removendo o elemento do DOM, o hidden pode causar problemas de performance, como por exemplo, se o elemento tiver um *ngFor, o angular irá percorrer todos os elementos, mesmo os que estão escondidos -->
+<!-- Para questões de segurança não é aconselhável usar o [hidden], pois o usuário pode alterar o valor do hidden no console do navegador -->
+
+<h5>hidden como alternativa</h5>
+<div [hidden]="mostrarCursos">
+  Lista de cursos
+</div>
+
+<div [hidden]="!mostrarCursos">
+  Não existem cursos para serem listados
+</div>
+
+<br>
+<!--onMostrarCursos() eh um método que está no componente que altera o boolean entre verdadeiro e falso -->
+<button (click)="onMostrarCursos()">Mostrar/Esconder Cursos</button>
+<br><br>
+<!-- Também é possível fazer a alteração do booleano diretamente no html -->
+<button (click)="mostrarCursos = !mostrarCursos">Mostrar/Esconder Cursos</button>
+<br><br>
+<!--------------------------------------------------------------------------------------------------------------------->
+
+<!--  não existe um else no angular, para isso é necessário utilizar o ng-template -->
+<!-- o ng-template é uma diretiva do angular que não é renderizada no html -->
+<!-- dessa forma, o angular não renderiza o elseBloco, mas o elseBloco é referenciado pelo *ngIf -->
+<!--O elseBloco é o nome da variável que será usada para referenciar o ng-template, essa variável está sendo criada aqui -->
+
+
+<!-- aqui eh um exemplo de ng-template que irá usar o else -->
+<div *ngIf="cursos.length > 0; else elseBloco">
+  Lista de cursos
+</div>
+
+<ng-template #elseBloco>
+  <div>
+    Não existem cursos para serem listados
+  </div>
+</ng-template>
+
+
+<!-- aqui eh um exemplo de ng-template que irá usar o then/else-->
+<div *ngIf="cursos.length > 0; then thenBloco; else elseBloco">
+</div>
+
+<ng-template #thenBloco>
+  <div>
+    Lista de cursos
+  </div>
+</ng-template>
+
+<ng-template #elseBloco>
+  <div>
+    Não existem cursos para serem listados
+  </div>
+</ng-template>
+
+
+
+
+
+

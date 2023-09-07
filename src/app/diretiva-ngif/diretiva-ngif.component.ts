@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./diretiva-ngif.component.scss']
 })
 export class DiretivaNgifComponent {
+  cursos: string [] = ["Angular 2"];
+  mostrarCursos: boolean = true;
+
+  onMostrarCursos(){
+    this.mostrarCursos = !this.mostrarCursos;
+  }
 
 }
